@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
-  get 'artists/index'
-  get 'artists/show'
-  get 'crates/index'
-  get 'crates/show'
-  get 'tracks/index'
-  get 'tracks/show'
-  get 'vinyls/index'
-  get 'vinyls/show'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+ 
+  resources :artist, :crates, :tracks, :vinyls
+  
 end
