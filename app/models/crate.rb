@@ -1,0 +1,2 @@
+class Crate < ApplicationRecord
+end
