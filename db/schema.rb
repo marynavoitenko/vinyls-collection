@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_13_175110) do
+ActiveRecord::Schema.define(version: 2018_10_27_042043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,13 @@ ActiveRecord::Schema.define(version: 2018_10_13_175110) do
   create_table "artist_tracks", force: :cascade do |t|
     t.integer "artist_id"
     t.integer "track_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "artist_vinyls", force: :cascade do |t|
+    t.integer "artist_id"
+    t.integer "vinyl_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,6 +42,13 @@ ActiveRecord::Schema.define(version: 2018_10_13_175110) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "labels", force: :cascade do |t|
+    t.text "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tracks", force: :cascade do |t|
     t.text "title"
     t.integer "vinyl_id"
@@ -44,11 +58,11 @@ ActiveRecord::Schema.define(version: 2018_10_13_175110) do
 
   create_table "vinyls", force: :cascade do |t|
     t.text "code"
-    t.text "label"
     t.text "name"
     t.integer "crate_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "label_id"
   end
 
 end
