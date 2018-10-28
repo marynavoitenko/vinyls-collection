@@ -1,5 +1,5 @@
 class CrateSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description
+  attributes :id, :name
 
   has_many :vinyls
 end
