@@ -3,6 +3,7 @@ class VinylSerializer < ActiveModel::Serializer
 
   belongs_to :crate
   belongs_to :label
+  has_many :genres
   has_many :tracks
 
   def tracks
