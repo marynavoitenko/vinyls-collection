@@ -2,7 +2,7 @@ class VinylsController < ApplicationController
   before_action :set_vinyl, only: [:show]
 
   def index
-      render json: Vinyl.all
+    render json: Vinyl.all
   end
 
   def create
@@ -16,13 +16,13 @@ class VinylsController < ApplicationController
   end
 
   def show
-      render json: @vinyl
+    render json: @vinyl
   end
 
   private
 
   def set_vinyl
-      @vinyl = Vinyl.find(params[:id])
+    @vinyl = Vinyl.find(params[:id])
   end
 
   def vinyl_params
