@@ -11,4 +11,7 @@
 class Genre < ApplicationRecord
   has_many :genre_vinyls
   has_many :vinyls, through: :genre_vinyls
+  
+  validates :name, presence: true
+  validates :name, uniqueness: true
 end
