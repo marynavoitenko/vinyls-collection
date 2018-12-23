@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Genre < ApplicationRecord
   has_many :genres_vinyls
   has_many :vinyls, through: :genres_vinyls

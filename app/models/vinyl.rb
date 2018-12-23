@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Vinyl < ApplicationRecord
   belongs_to :crate, required: false
   belongs_to :label, required: false

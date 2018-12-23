@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VinylSerializer < ActiveModel::Serializer
   attributes :id, :code, :name, :image_url, :release_date
 

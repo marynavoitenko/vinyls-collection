@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TracksController < ApplicationController
   before_action :set_track, only: [:show]
 

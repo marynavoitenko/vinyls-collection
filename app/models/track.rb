@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Track < ApplicationRecord
   belongs_to :vinyl, required: false
   has_many :artists_tracks

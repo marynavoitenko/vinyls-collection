@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Artist < ApplicationRecord
   has_many :artists_tracks
   has_many :tracks, through: :artists_tracks

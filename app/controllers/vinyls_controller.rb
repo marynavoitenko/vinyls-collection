@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VinylsController < ApplicationController
   before_action :set_vinyl, only: [:show]
 
