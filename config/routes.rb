@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-
-  resources :artists, only: [:index, :show]
-  resources :crates, only: [:index, :show]
-  resources :labels, only: [:index, :show]
-  resources :tracks, only: [:index, :show]
-  resources :genres, only: [:index, :show]
-  resources :vinyls, only: [:index, :show, :create]
-
+  namespace :api do
+    resources :artists, only: [:index, :show]
+    resources :crates, only: [:index, :show]
+    resources :labels, only: [:index, :show]
+    resources :tracks, only: [:index, :show]
+    resources :genres, only: [:index, :show]
+    resources :vinyls, only: [:index, :show, :create]
+  end
 end
