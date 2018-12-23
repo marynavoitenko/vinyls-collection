@@ -9,6 +9,6 @@ class VinylSerializer < ActiveModel::Serializer
   has_many :tracks
 
   def tracks
-    object.tracks.collect { |track| [id: track.id, title: track.title, artists: track.artists.map { |artist| [id: artist.id, name: artist.name] }] }
+    object.tracks.flat_map { |track| [id: track.id, title: track.title, artists: track.artists.flat_map { |artist| [id: artist.id, name: artist.name] }] }
   end
 end
