@@ -29,7 +29,10 @@ module Api
     end
 
     def vinyl_params
-      params.require(:vinyl).permit(:code, :label, :name)
+      params.require(:vinyl).permit(
+        :code, :name, :image_url, :release_date,
+        label_attributes: [:name]
+      )
     end
   end
 end
