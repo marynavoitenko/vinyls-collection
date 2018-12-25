@@ -23,7 +23,7 @@ vinyl2_track2 = vinyl2.tracks.create(title: 'Velluto Blu')
 vinyl2_track3 = vinyl2.tracks.create(title: 'Lone Solo Drummer')
 vinyl2_track4 = vinyl2.tracks.create(title: 'The Cunning Man')
 
-artist2 = vinyl2.artists.create(name: 'Musumece')
+artist2 = vinyl2.artists.create(name: 'Musumeci')
 artist3 = vinyl2.artists.create(name: 'Phunkadelica')
 vinyl2_track1.artists << artist2
 vinyl2_track1.artists << artist3
