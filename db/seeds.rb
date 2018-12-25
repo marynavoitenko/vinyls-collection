@@ -2,7 +2,7 @@
 
 label1 = Label.create(name: 'Innervisions')
 
-vinyl1 = label1.vinyls.create(code: 'IV81', name: 'Love Song')
+vinyl1 = label1.vinyls.create(code: 'IV81', title: 'Love Song')
 vinyl1_tracks1 = vinyl1.tracks.create(
   [{ title: 'Love Song' },
    { title: 'Love Dub' },
@@ -17,7 +17,7 @@ end
 
 vinyl1.genres.create(name: 'Minimal/Tech House')
 
-vinyl2 = label1.vinyls.create(code: 'IV82', name: 'Romantico Disco EP')
+vinyl2 = label1.vinyls.create(code: 'IV82', title: 'Romantico Disco EP')
 vinyl2_track1 = vinyl2.tracks.create(title: 'Babilonia')
 vinyl2_track2 = vinyl2.tracks.create(title: 'Velluto Blu')
 vinyl2_track3 = vinyl2.tracks.create(title: 'Lone Solo Drummer')

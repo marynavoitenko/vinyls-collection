@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VinylSerializer < ActiveModel::Serializer
-  attributes :id, :code, :name, :image_url, :release_date
+  attributes :id, :code, :title, :image_url, :release_date
 
   belongs_to :crate
   belongs_to :label

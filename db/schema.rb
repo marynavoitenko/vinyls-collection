@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2018_12_23_181401) do
   end
 
   create_table "vinyls", force: :cascade do |t|
-    t.text "name"
+    t.text "title"
     t.text "code"
     t.text "image_url"
     t.date "release_date"

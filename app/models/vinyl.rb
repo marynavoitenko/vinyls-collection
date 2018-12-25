@@ -12,8 +12,8 @@ class Vinyl < ApplicationRecord
   has_many :genres_vinyls
   has_many :genres, through: :genres_vinyls
 
-  validates :name, presence: true
-  validates :name, uniqueness: true
+  validates :title, presence: true
+  validates :title, uniqueness: true
   validates :code, uniqueness: true
 
   accepts_nested_attributes_for :label
