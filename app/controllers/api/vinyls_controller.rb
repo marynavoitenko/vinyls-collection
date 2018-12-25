@@ -10,7 +10,6 @@ module Api
 
     def create
       vinyl = Vinyl.new(vinyl_params)
-
       if vinyl.save
         render json: vinyl
       else
@@ -31,7 +30,8 @@ module Api
     def vinyl_params
       params.require(:vinyl).permit(
         :code, :title, :image_url, :release_date,
-        label_attributes: [:name]
+        label_attributes: [:name],
+        tracks_attributes: [:title, artists_attributes: [:name]]
       )
     end
   end

@@ -17,9 +17,17 @@ class Vinyl < ApplicationRecord
   validates :code, uniqueness: true
 
   accepts_nested_attributes_for :label
+  accepts_nested_attributes_for :tracks
 
   def label_attributes=(label_attributes)
     label = Label.find_or_create_by(label_attributes)
     self.label = label
+  end
+
+  def tracks_attributes=(tracks_attributes)
+    tracks_attributes.each do |track_attributes|
+      track = Track.find_or_create_track_with_artist(track_attributes)
+      self.tracks << track
+    end
   end
 end
