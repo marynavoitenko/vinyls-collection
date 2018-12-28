@@ -31,6 +31,7 @@ module Api
       params.require(:vinyl).permit(
         :code, :title, :image_url, :release_date,
         label_attributes: [:name],
+        genres_attributes: [:name],
         tracks_attributes: [:title, artists_attributes: [:name]]
       )
     end

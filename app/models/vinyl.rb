@@ -18,10 +18,18 @@ class Vinyl < ApplicationRecord
 
   accepts_nested_attributes_for :label
   accepts_nested_attributes_for :tracks
+  accepts_nested_attributes_for :genres
 
   def label_attributes=(label_attributes)
     label = Label.find_or_create_by(label_attributes)
     self.label = label
+  end
+
+  def genres_attributes=(genres_attributes)
+    genres_attributes.each do |genre_attributes|
+      genre = Genre.find_or_create_by(genre_attributes)
+      self.genres_vinyls.build(genre: genre)
+    end
   end
 
   def tracks_attributes=(tracks_attributes)
