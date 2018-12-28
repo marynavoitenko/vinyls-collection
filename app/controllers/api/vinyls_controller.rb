@@ -40,7 +40,8 @@ module Api
     def vinyl_params
       params.require(:vinyl).permit(
         :code, :title, :image_url, :release_date,
-        label_attributes: [:name],
+        crate_attributes: [:name, :description],
+        label_attributes: [:name, :description],
         genres_attributes: [:name],
         tracks_attributes: [:title, artists_attributes: [:name]]
       )

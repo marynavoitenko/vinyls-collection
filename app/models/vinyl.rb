@@ -17,8 +17,14 @@ class Vinyl < ApplicationRecord
   validates :code, uniqueness: true
 
   accepts_nested_attributes_for :label
+  accepts_nested_attributes_for :crate
   accepts_nested_attributes_for :tracks
   accepts_nested_attributes_for :genres
+
+  def crate_attributes=(crate_attributes)
+    crate = Crate.find_or_create_by(crate_attributes)
+    self.crate = crate
+  end
 
   def label_attributes=(label_attributes)
     label = Label.find_or_create_by(label_attributes)
