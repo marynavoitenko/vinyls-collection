@@ -36,6 +36,9 @@ class Vinyl < ApplicationRecord
     tracks_attributes.each do |track_attributes|
       track = Track.find_or_create_track_with_artist(track_attributes)
       self.tracks << track
+      track.artists.each do |artist|
+        self.artists_vinyls.build(artist: artist)
+      end
     end
   end
 end
