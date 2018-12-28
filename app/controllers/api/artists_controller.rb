@@ -2,7 +2,7 @@
 
 module Api
   class ArtistsController < ApplicationController
-    before_action :set_artist, only: [:show]
+    before_action :set_artist, only: [:show, :update]
 
     def index
       render json: Artist.all
@@ -20,6 +20,15 @@ module Api
 
     def show
       render json: @artist
+    end
+
+    def update
+      @artist.update(artist_params)
+      if @artist.save
+        render json: @artist
+      else
+        render json: { message: 'Artist was not updated' }, status: 422
+      end
     end
 
     private

@@ -2,7 +2,7 @@
 
 module Api
   class VinylsController < ApplicationController
-    before_action :set_vinyl, only: [:show]
+    before_action :set_vinyl, only: [:show, :update]
 
     def index
       render json: Vinyl.all
@@ -19,6 +19,16 @@ module Api
 
     def show
       render json: @vinyl
+    end
+
+    def update
+      # TODO: associations update
+      @vinyl.update(vinyl_params)
+      if @vinyl.save
+        render json: @vinyl
+      else
+        render json: { message: 'Vinyl was not updated' }, status: 422
+      end
     end
 
     private

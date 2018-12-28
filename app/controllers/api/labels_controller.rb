@@ -2,7 +2,7 @@
 
 module Api
   class LabelsController < ApplicationController
-    before_action :set_label, only: [:show]
+    before_action :set_label, only: [:show, :update]
 
     def index
       render json: Label.all
@@ -19,6 +19,15 @@ module Api
 
     def show
       render json: @label
+    end
+
+    def update
+      @label.update(label_params)
+      if @label.save
+        render json: @label
+      else
+        render json: { message: 'Label was not updated' }, status: 422
+      end
     end
 
     private

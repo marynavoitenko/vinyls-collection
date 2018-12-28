@@ -2,7 +2,7 @@
 
 module Api
   class TracksController < ApplicationController
-    before_action :set_track, only: [:show]
+    before_action :set_track, only: [:show, :update]
 
     def index
       render json: Track.all
@@ -20,6 +20,15 @@ module Api
 
     def show
       render json: @track
+    end
+
+    def update
+      @track.update(track_params)
+      if @track.save
+        render json: @track
+      else
+        render json: { message: 'Track was not updated' }, status: 422
+      end
     end
 
     private

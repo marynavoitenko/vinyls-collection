@@ -2,11 +2,11 @@
 
 Rails.application.routes.draw do
   namespace :api do
-    resources :artists, only: [:index, :show, :create]
+    resources :artists, only: [:index, :show, :create, :update]
     resources :crates, only: [:index, :show]
-    resources :labels, only: [:index, :show, :create]
-    resources :tracks, only: [:index, :show, :create]
-    resources :genres, only: [:index, :show, :create]
-    resources :vinyls, only: [:index, :show, :create]
+    resources :labels, only: [:index, :show, :create, :update]
+    resources :tracks, only: [:index, :show, :create, :update]
+    resources :genres, only: [:index, :show, :create, :update]
+    resources :vinyls, only: [:index, :show, :create, :update]
   end
 end

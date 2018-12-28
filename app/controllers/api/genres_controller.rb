@@ -2,7 +2,7 @@
 
 module Api
   class GenresController < ApplicationController
-    before_action :set_genre, only: [:show]
+    before_action :set_genre, only: [:show, :update]
 
     def index
       render json: Genre.all
@@ -19,6 +19,15 @@ module Api
 
     def show
       render json: @genre
+    end
+
+    def update
+      @genre.update(genre_params)
+      if @genre.save
+        render json: @genre
+      else
+        render json: { message: 'Genre was not updated' }, status: 422
+      end
     end
 
     private
