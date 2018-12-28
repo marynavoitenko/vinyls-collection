@@ -12,7 +12,7 @@ class Track < ApplicationRecord
 
   def self.find_or_create_track_with_artist(track_attributes)
     track = Track.find_by(title: track_attributes['title'])
-    Track.create(track_attributes) unless track
+    track || Track.create(track_attributes)
   end
 
   def artists_attributes=(artists_attributes)
