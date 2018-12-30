@@ -4,6 +4,9 @@ require 'csv'
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'vinyls_collection.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+
+vinyls = []
+
 csv.each do |row|
   # get all values of artists_tracks columns for the row
   artists_tracks = row.find_all do |i|
@@ -37,8 +40,10 @@ csv.each do |row|
     tracks_attributes: tracks_attributes
   }
 
-  Vinyl.create(vinyl_params)
+  vinyls << Vinyl.new(vinyl_params)
 end
+
+Vinyl.import(vinyls)
 
 p "Created #{Label.count} labels"
 p "Created #{Vinyl.count} vinyls"
