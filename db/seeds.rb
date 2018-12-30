@@ -1,40 +1,44 @@
 # frozen_string_literal: true
 
-label1 = Label.create(name: 'Innervisions')
+require 'csv'
 
-vinyl1 = label1.vinyls.create(code: 'IV81', title: 'Love Song')
-vinyl1_tracks1 = vinyl1.tracks.create(
-  [{ title: 'Love Song' },
-   { title: 'Love Dub' },
-   { title: 'Listen To Charanjit' }]
-)
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'vinyls_collection.csv'))
+csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+csv.each do |row|
+  # get all values of artists_tracks columns for the row
+  artists_tracks = row.find_all do |i|
+    i[0] == 'artists_names_track_title' && !i[1].nil?
+  end.map(&:last)
 
-artist1 = vinyl1.artists.create(name: 'Marcus Worgull')
+  # build tracks_attributes
+  tracks_attributes = artists_tracks.map do |artists_track|
+    artists, track = artists_track.split('-').map(&:strip)
+    artists = artists.split(',').map(&:strip)
 
-vinyl1_tracks1.each do |track|
-  track.artists << artist1
+    artists_attributes = artists.map do |artist|
+      { name: artist }
+    end
+
+    {
+      title: track,
+      artists_attributes: artists_attributes
+    }
+  end
+
+  vinyl_params = {
+    code: row['vinyl_code'],
+    title: row['vinyl_title'],
+    label_attributes: {
+      name: row['label_name']
+    },
+    genres_attributes: [
+      { name: row['genre_name'] }
+    ],
+    tracks_attributes: tracks_attributes
+  }
+
+  Vinyl.create(vinyl_params)
 end
-
-vinyl1.genres.create(name: 'Minimal/Tech House')
-
-vinyl2 = label1.vinyls.create(code: 'IV82', title: 'Romantico Disco EP')
-vinyl2_track1 = vinyl2.tracks.create(title: 'Babilonia')
-vinyl2_track2 = vinyl2.tracks.create(title: 'Velluto Blu')
-vinyl2_track3 = vinyl2.tracks.create(title: 'Lone Solo Drummer')
-vinyl2_track4 = vinyl2.tracks.create(title: 'The Cunning Man')
-
-artist2 = vinyl2.artists.create(name: 'Musumeci')
-artist3 = vinyl2.artists.create(name: 'Phunkadelica')
-vinyl2_track1.artists << artist2
-vinyl2_track1.artists << artist3
-vinyl2_track2.artists << artist2
-vinyl2_track2.artists << artist3
-
-artist4 = vinyl2.artists.create(name: 'Stereocalypse')
-vinyl2_track3.artists << artist4
-vinyl2_track4.artists << artist4
-
-vinyl2.genres.create(name: 'Disco/Nu-Disco')
 
 p "Created #{Label.count} labels"
 p "Created #{Vinyl.count} vinyls"
