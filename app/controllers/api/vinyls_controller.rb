@@ -5,27 +5,27 @@ module Api
     before_action :set_vinyl, only: [:show, :update]
 
     def index
-      render json: Vinyl.all
+      render json: Vinyl.all, include: [:crates, :labels, :genres_vinyls, :tracks]
     end
 
     def create
       vinyl = Vinyl.new(vinyl_params)
       if vinyl.save
-        render json: vinyl
+        render json: vinyl, include: [:crates, :labels, :genres_vinyls, :tracks]
       else
         render json: { message: 'Vinyl was not created' }, status: 422
       end
     end
 
     def show
-      render json: @vinyl
+      render json: @vinyl, include: [:crates, :labels, :genres_vinyls, :tracks]
     end
 
     def update
       # TODO: associations update
       @vinyl.update(vinyl_params)
       if @vinyl.save
-        render json: @vinyl
+        render json: @vinyl, include: [:crates, :labels, :genres_vinyls, :tracks] 
       else
         render json: { message: 'Vinyl was not updated' }, status: 422
       end
