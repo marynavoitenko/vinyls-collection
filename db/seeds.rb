@@ -25,9 +25,12 @@ csv.each do |row|
     }
   end
 
+  release_date = Date.strptime(row['vinyl_release_date'], '%m/%d/%Y')
+
   vinyl_params = {
     code: row['vinyl_code'],
     title: row['vinyl_title'],
+    release_date: release_date,
     label_attributes: {
       name: row['label_name']
     },

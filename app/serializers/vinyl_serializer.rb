@@ -8,6 +8,10 @@ class VinylSerializer < ActiveModel::Serializer
   has_many :genres
   has_many :tracks
 
+  def release_date
+    object.release_date.strftime("%B %e %Y")
+  end
+
   def tracks
     object.tracks.flat_map { |track| [id: track.id, title: track.title, artists: track.artists.flat_map { |artist| [id: artist.id, name: artist.name] }] }
   end
