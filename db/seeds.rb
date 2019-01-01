@@ -40,7 +40,12 @@ csv.each do |row|
     tracks_attributes: tracks_attributes
   }
 
-  Vinyl.create(vinyl_params)
+  vinyl = Vinyl.new(vinyl_params)
+  if vinyl.save
+    p "#{vinyl.title} created"
+  else
+    p "#{vinyl.title} NOT created"
+  end
 end
 
 p "Created #{Label.count} labels"

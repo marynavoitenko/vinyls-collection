@@ -13,7 +13,6 @@ class Vinyl < ApplicationRecord
   has_many :genres, through: :genres_vinyls
 
   validates :title, presence: true
-  validates :title, uniqueness: true
   validates :code, uniqueness: true
 
   accepts_nested_attributes_for :label
