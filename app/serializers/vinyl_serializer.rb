@@ -15,5 +15,4 @@ class VinylSerializer < ActiveModel::Serializer
   def tracks
     object.tracks.flat_map { |track| [id: track.id, title: track.title, artists: track.artists.flat_map { |artist| [id: artist.id, name: artist.name] }] }
   end
-
 end
