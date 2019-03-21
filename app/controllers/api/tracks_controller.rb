@@ -5,7 +5,7 @@ module Api
     before_action :set_track, only: [:show, :update]
 
     def index
-      render json: Track.all
+      render json: tracks
     end
 
     def create
@@ -33,12 +33,23 @@ module Api
 
     private
 
+    def tracks
+      @tracks ||= Track.all.eager_load(tracks_preloads)
+    end
+
+    def tracks_preloads
+      [
+        :artists,
+        :vinyl
+      ]
+    end
+
     def track_params
       params.require(:track).permit(:title, artists_attributes: [:name])
     end
 
     def set_track
-      @track = Track.find(params[:id])
+      @track = Track.eager_load(tracks_preloads).find(params[:id])
     end
   end
 end
