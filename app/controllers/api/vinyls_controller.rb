@@ -5,7 +5,7 @@ module Api
     before_action :set_vinyl, only: [:show, :update]
 
     def index
-      render json: Vinyl.all
+      render json: vinyls
     end
 
     def create
@@ -33,8 +33,21 @@ module Api
 
     private
 
+    def vinyls
+      @vinyls ||= Vinyl.all.eager_load(vinyls_preloads)
+    end
+
+    def vinyls_preloads
+      [
+        :crate,
+        :label,
+        :genres,
+        { tracks: :artists }
+      ]
+    end
+
     def set_vinyl
-      @vinyl = Vinyl.find(params[:id])
+      @vinyl = Vinyl.eager_load(vinyls_preloads).find(params[:id])
     end
 
     def vinyl_params

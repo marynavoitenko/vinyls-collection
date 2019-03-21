@@ -4,7 +4,7 @@ class VinylSerializer < ActiveModel::Serializer
   attributes :id, :code, :title, :image_url, :release_date
 
   belongs_to :crate
-  belongs_to :label
+  belongs_to :label, serializer: LabelSerializer
   has_many :genres
   has_many :tracks, serializer: VinylTrackSerializer
 
