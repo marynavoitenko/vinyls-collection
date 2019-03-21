@@ -5,7 +5,7 @@ module Api
     before_action :set_crate, only: [:show, :update]
 
     def index
-      render json: Crate.all
+      render json: crates
     end
 
     def create
@@ -32,12 +32,22 @@ module Api
 
     private
 
+    def crates
+      @crates ||= Crate.all.eager_load(crates_preloads)
+    end
+
+    def crates_preloads
+      [
+        :vinyls
+      ]
+    end
+
     def crate_params
       params.require(:crate).permit(:name, :description)
     end
 
     def set_crate
-      @crate = Crate.find(params[:id])
+      @crate = Crate.eager_load(crates_preloads).find(params[:id])
     end
   end
 end
