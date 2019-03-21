@@ -5,7 +5,7 @@ module Api
     before_action :set_artist, only: [:show, :update]
 
     def index
-      render json: Artist.all
+      render json: artists
     end
 
     def create
@@ -33,12 +33,22 @@ module Api
 
     private
 
+    def artists
+      @artists ||= Artist.all.eager_load(artists_preloads)
+    end
+
+    def artists_preloads
+      [
+        :vinyls
+      ]
+    end
+
     def artist_params
       params.require(:artist).permit(:name)
     end
 
     def set_artist
-      @artist = Artist.find(params[:id])
+      @artist = Artist.eager_load(artists_preloads).find(params[:id])
     end
   end
 end
