@@ -5,7 +5,7 @@ module Api
     before_action :set_genre, only: [:show, :update]
 
     def index
-      render json: Genre.all
+      render json: genres
     end
 
     def create
@@ -32,12 +32,22 @@ module Api
 
     private
 
+    def genres
+      @genres ||= Genre.all.eager_load(genres_preloads)
+    end
+
+    def genres_preloads
+      [
+        :vinyls
+      ]
+    end
+
     def genre_params
       params.require(:genre).permit(:name)
     end
 
     def set_genre
-      @genre = Genre.find(params[:id])
+      @genre = Genre.eager_load(genres_preloads).find(params[:id])
     end
   end
 end
