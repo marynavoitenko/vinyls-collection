@@ -20,9 +20,4 @@ namespace :db do
       puts 'Please pass a date to the task'
     end
   end
-
-  desc 'Seed from csv file'
-  task :seed_from_csv do
-    Rake::Task['db:setup'].invoke
-  end
 end
